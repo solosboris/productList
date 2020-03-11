@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
-import { filter, map } from 'rxjs/operators';
+import { catchError, filter, map } from 'rxjs/operators';
 
 export interface Product {
   id: string,
@@ -24,8 +24,24 @@ export class ProductsService {
   constructor(private __httpClient: HttpClient) { }
 
   private __getAllProducts(): Observable<Product[]> {
-    return this.__httpClient.get<Product[]>(this.__prodHttpServiceURL);
+    return this.__httpClient.get<Product[]>(this.__prodHttpServiceURL)
+      .pipe(catchError(this.handleError<Product[]>('__getAllProducts', [])));
   }
+
+  /**
+   * Handle Http operation that failed.
+   * Let the app continue.
+   * @param operation - name of the operation that failed
+   * @param result - optional value to return as the observable result
+   */
+  private handleError<T> (operation = 'operation', result?: T) {
+    return (error: any): Observable<T> => {
+      console.error(error); // log to console instead
+      console.log(`${operation} has failed: ${error.message}`);
+      // Let the app keep running by returning an empty result.
+      return of(result as T);
+    };
+  }  
 
   public getProducts(size?: string, orderByPrice: boolean = false): Observable<Product[]> {
     let filtered: Product[] = [];
