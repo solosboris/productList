@@ -20,7 +20,7 @@ describe('ProductsService', () => {
 
   it ('should successfully getProducts', () => {
     let collect: string[] = [];
-    productsService.getProducts('', true).forEach(prods => {
+    productsService.getProducts('', true).subscribe(prods => {
       prods.forEach(prod => collect.push(`${prod.id}`));
     });
     console.log('getProducts '.concat(collect.length.toString()));
@@ -29,7 +29,7 @@ describe('ProductsService', () => {
 
   it ('should successfully getProducts XL & sort', () => {
     let collect: string[] = [];
-    productsService.getProducts('XL', true).forEach(prods => {
+    productsService.getProducts('XL', true).subscribe(prods => {
       prods.forEach(prod => {
         collect.push(`${prod.id}`);
         console.log(`${prod.priceO} ${prod.id} ${prod.sizes.toString()} ${prod.brand} ${prod.description}`);
