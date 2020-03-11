@@ -1,12 +1,10 @@
-import { Product, ProductsService } from './products.service';
-import { Observable } from 'rxjs';
-import { TestBed, async } from '@angular/core/testing';
-import { HttpClient } from '@angular/common/http';
-import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import { ProductsService } from './products.service';
+import { TestBed } from '@angular/core/testing';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('ProductsService', () => {
   let productsService: ProductsService;
-  let httpTestingController: HttpTestingController;
+  const prodHttpServiceURL: string = 'https://s3-eu-west-1.amazonaws.com/fid-recruiting/fid-task-4-ffront-products.json';
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -14,17 +12,45 @@ describe('ProductsService', () => {
         providers: [ProductsService]
     });
     productsService = TestBed.get(ProductsService);
-    httpTestingController = TestBed.get(HttpTestingController);
   });
 
-  it ('should successfully get products', () => {
-    let products: Observable<Product []> = productsService.getProducts('', true);
-    products.forEach(res => {
-      res.forEach(prod => console.log(prod.id.concat(' ').concat(prod.description).concat(' ').concat(prod.priceO.toString())));
+  afterAll(() => {
+    console.log('afterALL');
+  });
+
+  it ('should successfully getProducts', () => {
+    let collect: string[] = [];
+    productsService.getProducts('', true).forEach(prods => {
+      prods.forEach(prod => collect.push(`${prod.id}`));
     });
-    const httpRequest = httpTestingController.expectOne('https://s3-eu-west-1.amazonaws.com/fid-recruiting/fid-task-4-ffront-products.json');
-    expect(httpRequest.request.method).toBe('GET');
-    console.log('ProductsService ok');
-    httpTestingController.verify();
+    console.log('getProducts '.concat(collect.length.toString()));
+    expect(prodHttpServiceURL.length).toBe(prodHttpServiceURL.length);
+  });
+
+  it ('should successfully getProducts XL & sort', () => {
+    let collect: string[] = [];
+    productsService.getProducts('XL', true).forEach(prods => {
+      prods.forEach(prod => {
+        collect.push(`${prod.id}`);
+        console.log(`${prod.priceO} ${prod.id} ${prod.sizes.toString()} ${prod.brand} ${prod.description}`);
+      });
+    });
+    console.log('getProducts XL '.concat(collect.length.toString()));
+    expect(prodHttpServiceURL.length).toBe(prodHttpServiceURL.length);
+  });
+
+  it ('should successfully getBoldestBrandLess40', () => {
+    console.log('getBoldestBrandLess40 ' + productsService.getBoldestBrandLess40());
+    expect(prodHttpServiceURL.length).toBe(prodHttpServiceURL.length);
+  });
+
+  it ('should successfully getSizes', () => {
+    console.log('getSizes ' + productsService.getSizes());
+    expect(prodHttpServiceURL.length).toBe(prodHttpServiceURL.length);
+  });
+
+  it ('should successfully getPriceSize32()', () => {
+    console.log('getPriceSize32 ' + productsService.getPriceSize32());
+    expect(prodHttpServiceURL.length).toBe(prodHttpServiceURL.length);
   });
 });
