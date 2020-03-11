@@ -26,7 +26,7 @@ export class ProductsService {
   private __getAllProducts(): Observable<Product[]> {
     return this.__httpClient.get<Product[]>(this.__prodHttpServiceURL)
       .pipe(tap(_ => console.log('fetched the products from '.concat(this.__prodHttpServiceURL))),
-            catchError(this.handleError<Product[]>('__getAllProducts', [])));
+            catchError(this.__handleError<Product[]>('__getAllProducts', [])));
   }
 
   /**
@@ -35,7 +35,7 @@ export class ProductsService {
    * @param operation - name of the operation that failed
    * @param result - optional value to return as the observable result
    */
-  private handleError<T> (operation = 'operation', result?: T) {
+  private __handleError<T> (operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
       console.error(error); // log to console instead
       console.log(`${operation} has failed: ${error.message}`);
