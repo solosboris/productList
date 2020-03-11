@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
-import { catchError, filter, map } from 'rxjs/operators';
+import { catchError, filter, map, tap } from 'rxjs/operators';
 
 export interface Product {
   id: string,
@@ -25,7 +25,8 @@ export class ProductsService {
 
   private __getAllProducts(): Observable<Product[]> {
     return this.__httpClient.get<Product[]>(this.__prodHttpServiceURL)
-      .pipe(catchError(this.handleError<Product[]>('__getAllProducts', [])));
+      .pipe(tap(_ => console.log('fetched the products from '.concat(this.__prodHttpServiceURL))),
+            catchError(this.handleError<Product[]>('__getAllProducts', [])));
   }
 
   /**
