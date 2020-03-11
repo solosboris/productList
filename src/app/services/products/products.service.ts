@@ -19,7 +19,7 @@ export interface Product {
 })
 export class ProductsService {
 
-  private __prodHttpServiceURL: string = 'https://s3-eu-west-1.amazonaws.com/fid-recruiting/fid-task-4-ffront-products.json';
+  private __prodHttpServiceURL: string = 'http://s3-eu-west-1.amazonaws.com/fid-recruiting/fid-task-4-ffront-products.json';
 
   constructor(private __httpClient: HttpClient) { }
 
@@ -38,7 +38,7 @@ export class ProductsService {
   private __handleError<T> (operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
       console.error(error); // log to console instead
-      console.log(`${operation} has failed: ${error.message}`);
+      console.log(`${operation} has failed - ${error.message}`);
       // Let the app keep running by returning an empty result.
       return of(result as T);
     };

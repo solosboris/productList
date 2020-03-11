@@ -4,7 +4,7 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('ProductsService', () => {
   let productsService: ProductsService;
-  const prodHttpServiceURL: string = 'https://s3-eu-west-1.amazonaws.com/fid-recruiting/fid-task-4-ffront-products.json';
+  const prodHttpServiceURL: string = 'http://s3-eu-west-1.amazonaws.com/fid-recruiting/fid-task-4-ffront-products.json';
 
   beforeEach(() => {
     TestBed.configureTestingModule({
