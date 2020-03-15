@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
 import { ProductsService, Product } from '../services/products/products.service';
 
 @Component({
@@ -12,13 +11,12 @@ export class ProductlistComponent implements OnInit {
 
   public prods: Product[] = [];
 
-  constructor(private __productsService: ProductsService) { }
+  constructor(private productsService: ProductsService) { }
 
   ngOnInit(): void { }
 
-  onSubmit(size) {
-    console.log('size '.concat(size));
+  onSubmit(size: string) {
     this.prods = [];
-    this.__productsService.getProducts(size).subscribe(products => products.forEach(prod => { this.prods.push(prod); }));
+    this.productsService.getProducts(size).subscribe(products => products.forEach(prod => { this.prods.push(prod); }));
   }
 }
