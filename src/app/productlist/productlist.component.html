@@ -1,0 +1,36 @@
+<form #f="ngForm" (ngSubmit)="onSubmit(f.value.size)">
+    <h5>size</h5>
+
+    <mat-form-field>
+        <input matInput type="text" placeholder="" name="size" ngModel style="border: 2px; border-color: #ff4f00;">
+    </mat-form-field>
+
+    <button mat-raised-button color="accent" type="submit">
+        <mat-icon>search</mat-icon>
+        Search&nbsp;the&nbsp;size
+    </button>
+
+    <ul class="spacer" fxLayout="column" style="height: 120px;">
+        <li *ngFor="let prod of prods;">
+            <h3 fxFlex>
+                <mat-card-title>{{prod.description}}</mat-card-title>
+                <br>
+                <mat-card-content>
+                    <a href="{{prod.url}}">
+                        {{prod.brand.concat('&nbsp;$&nbsp;').concat(prod.priceO.toString()).concat('\nsizes&nbsp;').concat(prod.sizes.toString())}}
+                    </a>
+                </mat-card-content>
+                <br>
+                <span>
+                    <a href="{{prod.images[0]}}">
+                        <img src="{{prod.images[0]}}" height="120" width="80">
+                    </a>
+                    &nbsp;
+                    <a href="{{prod.images[1]}}">
+                        <img src="{{prod.images[1]}}"height="120" width="80">
+                    </a>
+                </span>
+            </h3>
+        </li>
+    </ul>
+</form>

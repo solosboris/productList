@@ -19,6 +19,11 @@ export interface Product {
 })
 export class ProductsService {
 
+  /**
+   * Note that if you do use this API key,
+   * it will only work if the URL in
+   * your browser is "localhost"
+   */
   private __prodHttpServiceURL: string = 'http://s3-eu-west-1.amazonaws.com/fid-recruiting/fid-task-4-ffront-products.json';
 
   constructor(private __httpClient: HttpClient) { }
