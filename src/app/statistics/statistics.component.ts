@@ -9,15 +9,15 @@ import { ProductsService } from '../services/products/products.service';
 })
 export class StatisticsComponent implements OnInit {
 
-  topBrandLess40: string = '';
-  sizes: string = '';
-  priceSize32: string = '';
+  topBrandLess40 = '';
+  sizes = '';
+  priceSize32 = '';
 
-  constructor(private __productsService: ProductsService) { }
+  constructor(private productsService: ProductsService) { }
 
   ngOnInit(): void { 
-    this.topBrandLess40 = this.__productsService.getBoldestBrandLess40();
-    this.sizes = this.__productsService.getSizes();
-    this.priceSize32 = this.__productsService.getPriceSize32();
+    this.topBrandLess40 = this.productsService.getBoldestBrandLess40();
+    this.sizes = this.productsService.getSizes();
+    this.priceSize32 = this.productsService.getPriceSize32();
   }
 }
