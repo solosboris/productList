@@ -15,7 +15,7 @@ export class StatisticsComponent implements OnInit {
 
   constructor(private productsService: ProductsService) { }
 
-  ngOnInit(): void { 
+  ngOnInit(): void {
     this.topBrandLess40 = this.productsService.getBoldestBrandLess40();
     this.sizes = this.productsService.getSizes();
     this.priceSize32 = this.productsService.getPriceSize32();

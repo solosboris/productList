@@ -8,7 +8,7 @@ import { routes } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ProductlistComponent } from './productlist/productlist.component';
 import { ProductsService } from './services/products/products.service';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
@@ -25,7 +25,7 @@ import { StartComponent } from './start/start.component';
   imports: [
     AppRoutingModule, BrowserModule, HttpClientModule,
     RouterModule.forRoot(routes), FormsModule,
-    CommonModule, FlexLayoutModule,
+    CommonModule, FlexLayoutModule, ReactiveFormsModule,
     MatIconModule, MatButtonModule, MatInputModule,
     MatCardModule, MatFormFieldModule, BrowserAnimationsModule
   ],
