@@ -20,8 +20,5 @@ export class ProductlistComponent implements OnInit {
     console.log('size '.concat(size));
     this.prods = [];
     this.__productsService.getProducts(size).subscribe(products => products.forEach(prod => { this.prods.push(prod); }));
-    this.prods.forEach(prod => {
-      console.log(`${prod.brand} ${prod.description} ${prod.priceO}\n${prod.url}\n${prod.images.toString()}\n${prod.sizes.toString()}`);
-    });
   }
 }
