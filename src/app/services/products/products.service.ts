@@ -77,15 +77,34 @@ export class ProductsService {
   }
 
   public getSizes(): string {
-    let prodMap = new Map();
+    const prodMap = {};
     this.__getAllProducts().subscribe(products =>
-          products.forEach(prod => prodMap.set(prod.brand,
-                                               (prodMap.has(prod.brand) ? prodMap.get(prod.brand) : 0) + prod.sizes.length)));
-    let brand: string = null;
-    for (let brandCount of prodMap.entries()) {
-        brand = brand ? (brandCount[1] < prodMap.get(brand) ? brand : brandCount[0]) : brandCount[0];
-    }          
-    return brand ? brand.concat(': ').concat(prodMap.get(brand).toString()) : 'no sizes mapping';
+          products.forEach(prod => { prodMap[prod.brand] = prodMap[prod.brand] ? prodMap[prod.brand] : [];
+                                     prod.sizes.forEach(size => prodMap[prod.brand].push(size));
+                                   }));
+    const brandSizes = {};
+    Object.keys(prodMap).forEach(brand => {
+      if (prodMap.hasOwnProperty(brand)) {
+        const sizesUnique: string[] = [];
+        prodMap[brand].forEach(size => {
+          if (!sizesUnique.includes(size.toString())) {
+              sizesUnique.push(size.toString());
+          }
+        });
+        brandSizes[brand] = sizesUnique;
+      }
+    });
+    let brandMax: string = null;
+    Object.keys(brandSizes).forEach(brand => {
+        brandMax = brandSizes.hasOwnProperty(brand) ?
+                    (brandMax ? (brandSizes[brand].length > brandSizes[brandMax].length ? brand : brandMax) :
+                                 brand) :
+                    brandMax;
+    });
+    return brandMax ?
+            'max sized '.concat(brandMax)
+              .concat(': ').concat(brandSizes[brandMax].toString())
+              .concat(' ').concat(brandSizes[brandMax].length.toString()) : 'no sizes mapping';
   }
 
   public getPriceSize32(): string {
