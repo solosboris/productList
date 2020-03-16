@@ -42,7 +42,7 @@ describe('StatisticsComponent', () => {
 
   it('#2 should getSizes', () => {
     component.ngOnInit();
-    expect(component.sizes.indexOf('max sized') == 0).toBeTruthy();
+    expect(component.sizes.indexOf('max sized') === 0).toBeTruthy();
   });
 
   it('#1 should getPriceSize32', () => {

@@ -4,14 +4,14 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('ProductsService', () => {
   let productsService: ProductsService;
-  const prodHttpServiceURL: string = 'http://s3-eu-west-1.amazonaws.com/fid-recruiting/fid-task-4-ffront-products.json';
+  const prodHttpServiceURL = 'http://s3-eu-west-1.amazonaws.com/fid-recruiting/fid-task-4-ffront-products.json';
 
   beforeEach(() => {
     TestBed.configureTestingModule({
         imports: [HttpClientTestingModule],
         providers: [ProductsService]
     });
-    productsService = TestBed.get(ProductsService);
+    productsService = TestBed.inject(ProductsService);
   });
 
   afterAll(() => {
@@ -19,7 +19,7 @@ describe('ProductsService', () => {
   });
 
   it ('should successfully getProducts', () => {
-    let collect: string[] = [];
+    const collect: string[] = [];
     productsService.getProducts('', true).subscribe(prods => {
       prods.forEach(prod => collect.push(`${prod.id}`));
     });
@@ -28,7 +28,7 @@ describe('ProductsService', () => {
   });
 
   it ('should successfully getProducts XL & sort', () => {
-    let collect: string[] = [];
+    const collect: string[] = [];
     productsService.getProducts('XL', true).subscribe(prods => {
       prods.forEach(prod => {
         collect.push(`${prod.id}`);
