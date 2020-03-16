@@ -5,8 +5,10 @@ import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { routes } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { ProductlistComponent } from './productlist/productlist.component';
+import { AppComponent } from './components/app/app.component';
+import { ProductlistComponent } from './components/productlist/productlist.component';
+import { StatisticsComponent } from './components/statistics/statistics.component';
+import { StartComponent } from './components/start/start.component';
 import { ProductsService } from './services/products/products.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
@@ -17,8 +19,6 @@ import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { StatisticsComponent } from './statistics/statistics.component';
-import { StartComponent } from './start/start.component';
 
 @NgModule({
   declarations: [ AppComponent, ProductlistComponent, StatisticsComponent, StartComponent ],

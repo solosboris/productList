@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { ProductsService } from '../services/products/products.service';
+import { ProductsService } from '../../services/products/products.service';
 
 @Component({
   selector: 'app-statistics',
   templateUrl: './statistics.component.html',
-  styleUrls: ['../app.component.css'],
+  styleUrls: ['../../app.component.css'],
   providers: [ ProductsService ]
 })
 export class StatisticsComponent implements OnInit {
