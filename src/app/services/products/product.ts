@@ -6,5 +6,5 @@ export interface Product {
   priceR?: number;
   url: string;
   images: string[];
-  sizes: string[]
+  sizes: string[];
 }
