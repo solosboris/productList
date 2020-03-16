@@ -22,7 +22,7 @@ describe('ProductlistComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('should create ProductlistComponent', () => {
     expect(component).toBeTruthy();
   });
 });
